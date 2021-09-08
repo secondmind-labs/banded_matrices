@@ -1,0 +1,6 @@
+recursive-include banded_matrices/cc *.cc
+recursive-include banded_matrices/cc *.hpp
+recursive-include banded_matrices CMakeLists.txt
+recursive-include banded_matrices/cc *CMakeLists.txt
+global-exclude *.exe
+global-exclude *.so
