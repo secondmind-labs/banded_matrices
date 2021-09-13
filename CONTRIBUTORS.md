@@ -6,8 +6,8 @@ Because GitHub's [graph of contributors](http://github.com/secondmind-labs/marko
 [Artem Artemev](https://github.com/awav/), 
 [Lucas Bordeaux](https://www.linkedin.com/in/lucas-bordeaux-7704b42/),
 [Nicolas Durrande](https://sites.google.com/site/nicolasdurrandehomepage/),
-[James Hensman](https://jameshensman.github.io/), 
 [Stefanos Eleftheriadis](https://stefanosele.github.io/),
+[James Hensman](https://jameshensman.github.io/).
 
 
 Feel free to add yourself when you first contribute to banded_matrices' code, tests, or documentation!
