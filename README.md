@@ -99,3 +99,32 @@ poetry run task cpplint
 
 **NOTE:** Running the tests requires
 that the project virtual environment has been updated. See [Installation](#Installation).
+
+## The Secondmind Labs Community
+
+### Getting help
+
+**Bugs, feature requests, pain points, annoying design quirks, etc:**
+Please use [GitHub issues](https://github.com/secondmind-labs/markovflow/issues/) to flag up bugs/issues/pain points, suggest new features, and discuss anything else related to the use of banded_matrices that in some sense involves changing the banded_matrices code itself. We positively welcome comments or concerns about usability, and suggestions for changes at any level of design. We aim to respond to issues promptly, but if you believe we may have forgotten about an issue, please feel free to add another comment to remind us.
+
+### Slack workspace
+
+We have a public [Secondmind Labs slack workspace](https://secondmind-labs.slack.com/). Please use this [invite link](https://join.slack.com/t/secondmind-labs/shared_invite/zt-ph07nuie-gMlkle__tjvXBay4FNSLkw) and join the #banded_matrices channel, whether you'd just like to ask short informal questions or want to be involved in the discussion and future development of banded_matrices.
+
+
+### Contributing
+
+All constructive input is very much welcome. For detailed information, see the [guidelines for contributors](CONTRIBUTING.md).
+
+
+### Maintainers
+
+Banded_matrices was originally created at [Secondmind Labs](https://www.secondmind.ai/labs/) and is now maintained by (in alphabetical order)
+[Vincent Adam](https://vincentadam87.github.io/),
+[Artem Artemev](https://github.com/awav/).
+**We are grateful to [all contributors](CONTRIBUTORS.md) who have helped shape banded_matrices.**
+
+Banded_matrices is an open source project. If you have relevant skills and are interested in contributing then please do contact us (see ["The Secondmind Labs Community" section](#the-secondmind-labs-community) above).
+
+We are very grateful to our Secondmind Labs colleagues, maintainers of [GPflow](https://github.com/GPflow/GPflow), [GPflux](https://github.com/secondmind-labs/GPflux), [Trieste](https://github.com/secondmind-labs/trieste) and [Bellman](https://github.com/Bellman-devs/bellman), for their help with creating contributing guidelines, instructions for users and open-sourcing in general.
+
