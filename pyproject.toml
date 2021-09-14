@@ -2,7 +2,6 @@
 name = "banded_matrices"
 version = "0.32.0"
 description = "Native (C++) implementation of Banded Matrices for TensorFlow"
-author_email="banded_matrices@secondmind.ai"
 readme = "README.md"
 repository = "https://github.com/secondmind-labs/banded_matrices"
 license = "Apache-2.0"
