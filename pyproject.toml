@@ -17,10 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-include = [
-    "LICENSE",
-]
-include = ["dummy.c"]
+include = ["LICENSE", "dummy.c"]
 build = "build.py"
 
 [tool.poetry.dependencies]
