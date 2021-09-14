@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Python package
+name: Upload-PyPI
 
 on:
   push:
@@ -20,7 +20,7 @@ on:
       - "v*.*.*"
 
 jobs:
-  check-and-test:
+  upload-pypi:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -47,6 +47,7 @@ jobs:
         run: |
             poetry install
             poetry build
+      # ------------ check version matches tag
       - name: Verify git tag vs. VERSION
         run: |
           VERSION="v$(cat VERSION | tr -d '\t\r\n ')"
@@ -55,6 +56,7 @@ jobs:
             echo "The package version ($VERSION) and the latest tag version ($TAG) are different"
             exit 1
           fi
+      # ------------ publish to pypi
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
