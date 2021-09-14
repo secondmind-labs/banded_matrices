@@ -2,11 +2,23 @@
 name = "banded_matrices"
 version = "0.32.0"
 description = "Native (C++) implementation of Banded Matrices for TensorFlow"
+author_email="banded_matrices@secondmind.ai"
+readme = "README.md"
+repository = "https://github.com/secondmind-labs/banded_matrices"
 license = "Apache-2.0"
+keywords="Banded-matrices-linear-algebra"
 authors = ["Banded matrices contributors <labs@secondmind.ai>"]
 packages = [{include = "banded_matrices"}]
 classifiers = [
-    "License :: Apache-2.0"
+    "License :: Apache-2.0",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+include = [
+    "LICENSE",
 ]
 include = ["dummy.c"]
 build = "build.py"

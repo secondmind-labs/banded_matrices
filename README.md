@@ -105,7 +105,7 @@ that the project virtual environment has been updated. See [Installation](#Insta
 ### Getting help
 
 **Bugs, feature requests, pain points, annoying design quirks, etc:**
-Please use [GitHub issues](https://github.com/secondmind-labs/markovflow/issues/) to flag up bugs/issues/pain points, suggest new features, and discuss anything else related to the use of banded_matrices that in some sense involves changing the banded_matrices code itself. We positively welcome comments or concerns about usability, and suggestions for changes at any level of design. We aim to respond to issues promptly, but if you believe we may have forgotten about an issue, please feel free to add another comment to remind us.
+Please use [GitHub issues](https://github.com/secondmind-labs/banded_matrices/issues/) to flag up bugs/issues/pain points, suggest new features, and discuss anything else related to the use of banded_matrices that in some sense involves changing the banded_matrices code itself. We positively welcome comments or concerns about usability, and suggestions for changes at any level of design. We aim to respond to issues promptly, but if you believe we may have forgotten about an issue, please feel free to add another comment to remind us.
 
 ### Slack workspace
 
