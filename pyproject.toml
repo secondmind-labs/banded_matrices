@@ -6,7 +6,7 @@ author_email="banded_matrices@secondmind.ai"
 readme = "README.md"
 repository = "https://github.com/secondmind-labs/banded_matrices"
 license = "Apache-2.0"
-keywords = ["banded matrices". "linear algebra"]
+keywords = ["banded matrices", "linear algebra"]
 authors = ["Banded matrices contributors <labs@secondmind.ai>"]
 packages = [{include = "banded_matrices"}]
 classifiers = [
