@@ -22,11 +22,17 @@ install_requires = [
     "tensorflow>=2.2.1,<2.3.0",
 ]
 
+with open("VERSION.md") as file:
+    version = file.read().strip()
+
+with open("README.md") as file:
+    long_description = file.read()
+
 setup_kwargs = {
     "name": "banded-matrices",
-    "version": "0.0.4",
+    "version": version,
     "description": "Native (C++) implementation of Banded Matrices for TensorFlow",
-    "long_description": None,
+    "long_description": long_description,
     "maintainer": None,
     "maintainer_email": None,
     "url": None,

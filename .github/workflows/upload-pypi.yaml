@@ -14,10 +14,16 @@
 
 name: Upload-PyPI
 
+
 on:
   push:
-    tags:
-      - "v*.*.*"
+  release:
+    types:
+      - created
+# on:
+#  push:
+#    tags:
+#      - "v*.*.*"
 
 
 jobs:
