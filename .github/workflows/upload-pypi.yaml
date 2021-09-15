@@ -15,16 +15,11 @@
 name: Upload-PyPI
 
 
+
 on:
   push:
-  release:
-    types:
-      - created
-# on:
-#  push:
-#    tags:
-#      - "v*.*.*"
-
+    tags:
+      - "v*.*.*"
 
 jobs:
   check-and-test:
