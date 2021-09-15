@@ -22,7 +22,7 @@ install_requires = [
     "tensorflow>=2.2.1,<2.3.0",
 ]
 
-with open("VERSION.md") as file:
+with open("VERSION") as file:
     version = file.read().strip()
 
 with open("README.md") as file:
