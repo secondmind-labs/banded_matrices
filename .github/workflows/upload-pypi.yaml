@@ -50,7 +50,7 @@ jobs:
       - name: Run tests
         run: poetry run task test
   pypi:
-    needs: check-and-test
+    # needs: check-and-test
     runs-on: ubuntu-latest
     strategy:
       matrix:
