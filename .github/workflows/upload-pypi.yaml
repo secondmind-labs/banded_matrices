@@ -51,7 +51,6 @@ jobs:
         run: poetry run task test
   pypi:
     needs: check-and-test
-    if: ${{ github.event.release }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
