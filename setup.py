@@ -24,7 +24,7 @@ install_requires = [
 
 setup_kwargs = {
     "name": "banded-matrices",
-    "version": "0.32.0",
+    "version": "0.0.4",
     "description": "Native (C++) implementation of Banded Matrices for TensorFlow",
     "long_description": None,
     "maintainer": None,
