@@ -19,8 +19,9 @@ on:
     tags:
       - "v*.*.*"
 
+
 jobs:
-  upload-pypi:
+  check-and-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,9 +45,39 @@ jobs:
           sudo apt-get install cmake g++-7
       # ------------ build and install package
       - name: Install package
+        run: poetry install
+      # ------------ run tests
+      - name: Run tests
+        run: poetry run task test
+  pypi:
+    needs: check-and-test
+    if: ${{ github.event.release }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+        poetry-version: [1.1.6]
+    name: Release PyPi package
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      # ------------ Install poetry
+      - name: Setup pip/poetry
         run: |
-            poetry install
-            poetry build
+          pip install -U pip poetry twine
+          poetry config virtualenvs.create false
+      # ------------ install tools
+      - name: Install building tools
+        run: |
+          sudo apt-get install build-essential
+          sudo apt-get install cmake g++-7
+      # ------------ build and install package
+      - name: Install package
+        run: |
+          poetry install
+          poetry build
       # ------------ check version matches tag
       - name: Verify git tag vs. VERSION
         run: |
@@ -62,4 +93,3 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
-
