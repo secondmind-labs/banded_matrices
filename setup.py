@@ -29,7 +29,7 @@ with open("README.md") as file:
     long_description = file.read()
 
 setup_kwargs = {
-    "name": "banded-matrices",
+    "name": "banded_matrices",
     "version": version,
     "description": "Native (C++) implementation of Banded Matrices for TensorFlow",
     "long_description": long_description,
