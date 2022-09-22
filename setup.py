@@ -18,8 +18,7 @@ package_data = {
 install_requires = [
     "cmake>=3.18.0,<3.19.0",
     "importlib_metadata>=1.6,<2.0",
-    "numpy>=1.18.0,<2.0.0",
-    "tensorflow>=2.2.1,<2.3.0",
+    "tensorflow==2.4",
 ]
 
 with open("VERSION") as file:

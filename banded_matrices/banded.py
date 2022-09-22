@@ -127,7 +127,7 @@ class is suffixed with "Band" while files, functions and tests have no suffix.
 
 from functools import wraps
 from inspect import signature
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 import tensorflow as tf
@@ -145,6 +145,11 @@ from banded_matrices.types import (
 )
 
 # BROADCASTING
+
+def hash_tensor(tensor: Union[tf.Tensor, np.ndarray]) -> Union[tf.Tensor, np.ndarray]:
+    if isinstance(tensor, tf.Tensor):
+        return tensor.ref()
+    return tensor
 
 
 def broadcast_unary_operator(operator):
@@ -772,9 +777,9 @@ def _grad_product_band_band(
 
     # Mapping from each tensor to is pair of widths:
     bandwidth = {
-        left: (op.get_attr("left_lower_bandwidth"), op.get_attr("left_upper_bandwidth")),
-        right: (op.get_attr("right_lower_bandwidth"), op.get_attr("right_upper_bandwidth")),
-        grad: (op.get_attr("result_lower_bandwidth"), op.get_attr("result_upper_bandwidth")),
+        hash_tensor(left): (op.get_attr("left_lower_bandwidth"), op.get_attr("left_upper_bandwidth")),
+        hash_tensor(right): (op.get_attr("right_lower_bandwidth"), op.get_attr("right_upper_bandwidth")),
+        hash_tensor(grad): (op.get_attr("result_lower_bandwidth"), op.get_attr("result_upper_bandwidth")),
     }
 
     def product(
@@ -788,9 +793,9 @@ def _grad_product_band_band(
         Make a banded matrix products of two of the three terms,
         where the target should be shaped as the third term.
         """
-        left_lower_bandwidth, left_upper_bandwidth = bandwidth[lhs]
-        right_lower_bandwidth, right_upper_bandwidth = bandwidth[rhs]
-        result_lower_bandwidth, result_upper_bandwidth = bandwidth[result]
+        left_lower_bandwidth, left_upper_bandwidth = bandwidth[hash_tensor(lhs)]
+        right_lower_bandwidth, right_upper_bandwidth = bandwidth[hash_tensor(rhs)]
+        result_lower_bandwidth, result_upper_bandwidth = bandwidth[hash_tensor(result)]
 
         return product_band_band(
             lhs,
