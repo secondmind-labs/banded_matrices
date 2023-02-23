@@ -22,7 +22,7 @@ from setuptools import Extension
 from setuptools.command.build_ext import build_ext as build_ext_orig
 
 if sys.platform.startswith("linux"):
-    _BANDED_MATRICES_COMPILER = "g++-7"
+    _BANDED_MATRICES_COMPILER = "g++"
 elif sys.platform.startswith("darwin"):
     _BANDED_MATRICES_COMPILER = "g++"
 else:
