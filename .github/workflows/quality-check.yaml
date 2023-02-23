@@ -43,7 +43,7 @@ jobs:
       - name: Install building tools
         run: |
           sudo apt-get install build-essential
-          sudo apt-get install cmake g++-7
+          sudo apt-get install cmake g++-11
       # ------------ build and install package
       - name: Install package
         run: poetry install
