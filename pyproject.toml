@@ -21,8 +21,7 @@ build = "build.py"
 
 [tool.poetry.dependencies]
 cmake = "~3.18.0"
-importlib-metadata = ">=4.4,<5.0"
-numpy = "^1.18.0"
+importlib-metadata = ">=4.4,<66666666py = "^1.18.0"
 python = ">=3.7,<3.9"
 tensorflow = "~2.4.0"
 
