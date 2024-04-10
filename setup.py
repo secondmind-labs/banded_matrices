@@ -19,7 +19,7 @@ install_requires = [
     "cmake>=3.18.0,<3.19.0",
     "importlib_metadata>=4.4,<5.0",
     "numpy>=1.18.0,<2.0.0",
-    "tensorflow>=2.2.1,<2.3.0",
+    "tensorflow>=2.8.0,<2.9.0",
 ]
 
 with open("VERSION") as file:
