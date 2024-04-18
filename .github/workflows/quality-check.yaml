@@ -17,7 +17,6 @@ jobs:
     name: Python-${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v2
-      
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
@@ -27,13 +26,21 @@ jobs:
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
 
+      - name: Install Python dependencies
+        run: poetry install
+
+      - name: Configure environment variables for CMake
+        run: |
+          echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
+
+      - name: Verify TensorFlow installation
+        run: |
+          python -c "import tensorflow as tf; print(tf.__version__)"
+
       - name: Install building tools
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential cmake g++-14
-
-      - name: List directory contents
-        run: ls -la
 
       - name: Configure and Build C++ Library
         run: |
@@ -41,14 +48,6 @@ jobs:
           cd banded_matrices/build
           cmake .. -DCMAKE_BUILD_TYPE=Release
           make
-          cd ../..
-
-      - name: List build outputs
-        run: |
-          echo "Listing contents of banded_matrices/build/lib directory:"
-          ls -l banded_matrices/build/lib
-          echo "Listing contents of banded_matrices/build/bin directory:"
-          ls -l banded_matrices/build/bin
 
       - name: Install package
         run: poetry install
@@ -59,10 +58,4 @@ jobs:
 
       - name: Run tests
         run: poetry run task test
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: compiled-libraries
-          path: banded_matrices/build/lib
 
