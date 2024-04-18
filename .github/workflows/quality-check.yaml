@@ -1,17 +1,3 @@
-# Copyright 2021 The banded_matrices Contributors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 name: Tests
 
 on:
@@ -36,52 +22,47 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      # Install Python and Poetry dependencies
       - name: Setup pip/poetry
         run: |
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
 
-      # Install necessary system packages for building C++
       - name: Install building tools
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential cmake g++-14
 
-      # Configure and Build C++ Library
+      - name: List directory contents
+        run: ls -la
+
       - name: Configure and Build C++ Library
         run: |
-          mkdir build
-          cd build
+          mkdir -p banded_matrices/build
+          cd banded_matrices/build
           cmake .. -DCMAKE_BUILD_TYPE=Release
           make
-          cd ..
+          cd ../..
 
-      # List build outputs to verify they are in expected locations
       - name: List build outputs
         run: |
-          echo "Listing contents of build/lib directory:"
-          ls -l build/lib
-          echo "Listing contents of build/bin directory:"
-          ls -l build/bin
+          echo "Listing contents of banded_matrices/build/lib directory:"
+          ls -l banded_matrices/build/lib
+          echo "Listing contents of banded_matrices/build/bin directory:"
+          ls -l banded_matrices/build/bin
 
-      # Install the Python package which should now be able to find the C++ libraries
       - name: Install package
         run: poetry install
 
-      # Set the LD_LIBRARY_PATH to include the directory where the shared libraries are stored
       - name: Set environment variables for tests
         run: |
-          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/banded_matrices/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
-      # Run Python tests
       - name: Run tests
         run: poetry run task test
 
-      # Optionally, upload build artifacts for examination
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: compiled-libraries
-          path: build/lib
+          path: banded_matrices/build/lib
 
