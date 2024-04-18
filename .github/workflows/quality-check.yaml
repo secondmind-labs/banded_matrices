@@ -42,9 +42,9 @@ jobs:
 
       - name: Regenerate Poetry lock file
         run: |
-        rm -f poetry.lock
-        poetry lock
-        poetry install
+          rm -f poetry.lock
+          poetry lock
+          poetry install
 
       - name: Configure environment variables for CMake
         run: |
