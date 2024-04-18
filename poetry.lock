@@ -166,7 +166,7 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "flatbuffers"
-version = "1.12"
+version = "24.3.25"
 description = "The FlatBuffers serialization format for Python"
 category = "main"
 optional = false
@@ -174,7 +174,7 @@ python-versions = "*"
 
 [[package]]
 name = "gast"
-version = "0.4.0"
+version = "0.5.4"
 description = "Python AST that abstracts the underlying Python version"
 category = "main"
 optional = false
