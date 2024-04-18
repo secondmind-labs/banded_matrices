@@ -105,10 +105,10 @@ def gradient_reference_code(L, n, k, result_lower_bandwidth, bS, S):
     bL = bU.T / vec
 
     # Grad of: vec_inv_2 = 1.0 / vec ** 2
-    bvec = -2.0 * bvec_inv_2 / vec ** 3
+    bvec = -2.0 * bvec_inv_2 / vec**3
 
     # Grad of: vec_inv = 1.0 / vec
-    bvec -= np.sum(bU.T * L, 0) / (vec ** 2)
+    bvec -= np.sum(bU.T * L, 0) / (vec**2)
 
     # Grad of: vec = diag(L)
     bL += np.diag(bvec)
@@ -135,9 +135,7 @@ def gradient_reference_code_short(L, n, k, bS, S):
             bS[i + 1 : i + k, j] -= U[i, i + 1 : i + k] * bS[i, j]
             bU[i, i + 1 : i + k] -= S[i + 1 : i + k, j] * bS[i, j]
 
-    bL += bU.T / vec + (
-        np.diag(-2.0 * np.diag(bS) / vec ** 3 - np.sum(bU.T * L, 0) / (vec ** 2))
-    )
+    bL += bU.T / vec + (np.diag(-2.0 * np.diag(bS) / vec**3 - np.sum(bU.T * L, 0) / (vec**2)))
 
     return bL
 
