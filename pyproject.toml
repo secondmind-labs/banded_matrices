@@ -27,11 +27,7 @@ python = ">=3.8,<3.11"
 
 # Default TensorFlow version for Python 3.9 to 3.10
 tensorflow = [
-    { version = ">=2.4,<=2.10", markers = "python_version >= '3.9' and python_version < '3.11'" }
-]
-
-# Specific TensorFlow version for Python 3.8
-tensorflow = [
+    { version = ">=2.4,<=2.10", markers = "python_version >= '3.9' and python_version < '3.11'" },
     { version = "~2.4.0", markers = "python_version == '3.8'" }
 ]
 
