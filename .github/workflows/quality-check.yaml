@@ -20,7 +20,6 @@ on:
     types:
       - created
 
-
 jobs:
   check-and-test:
     runs-on: ubuntu-latest
@@ -32,22 +31,57 @@ jobs:
     name: Python-${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v2
+      
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      # ------------ Install poetry
+
+      # Install Python and Poetry dependencies
       - name: Setup pip/poetry
         run: |
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
-      # ------------ install tools
+
+      # Install necessary system packages for building C++
       - name: Install building tools
         run: |
-          sudo apt-get install build-essential
-          sudo apt-get install cmake g++-14
-      # ------------ build and install package
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake g++-14
+
+      # Configure and Build C++ Library
+      - name: Configure and Build C++ Library
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make
+          cd ..
+
+      # List build outputs to verify they are in expected locations
+      - name: List build outputs
+        run: |
+          echo "Listing contents of build/lib directory:"
+          ls -l build/lib
+          echo "Listing contents of build/bin directory:"
+          ls -l build/bin
+
+      # Install the Python package which should now be able to find the C++ libraries
       - name: Install package
         run: poetry install
-      # ------------ run tests
+
+      # Set the LD_LIBRARY_PATH to include the directory where the shared libraries are stored
+      - name: Set environment variables for tests
+        run: |
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+
+      # Run Python tests
       - name: Run tests
         run: poetry run task test
+
+      # Optionally, upload build artifacts for examination
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: compiled-libraries
+          path: build/lib
+
