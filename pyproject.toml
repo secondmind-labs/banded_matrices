@@ -75,6 +75,6 @@ line_length = 95
 
 
 [build-system]
-requires = ["poetry>=0.12", "tensorflow>=2.4.0,<=2.12.0", "cmake"]
+requires = ["poetry>=0.12", "tensorflow>=2.4.0,<=2.10.0", "cmake"]
 build-backend = "poetry.masonry.api"
 flags = ["-DCMAKE_CXX_STANDARD=14"]
