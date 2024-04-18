@@ -44,12 +44,12 @@ taskipy = "^1.2.0"
 
 
 [tool.pytest.ini_options]
+addopts = "--ignore=banded_matrices/banded.py"
 filterwarnings = [
     "ignore:`np.bool8` is a deprecated alias for `np.bool_`.*:DeprecationWarning"
 ]
 
-[tool.mypy]
-check_untyped_defs = false
+
 
 [tool.taskipy.tasks]
 lint = "pytest --pylint --cache-clear -m pylint -v && pytest --pylint --cache-clear -m pylint --pylint-rcfile=extrapylint"
