@@ -43,6 +43,10 @@ jobs:
       - name: Install Python dependencies
         run: poetry install
 
+      - name: Update Poetry lock file
+        run: |
+          poetry update
+
       - name: Configure environment variables for CMake
         run: |
           echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
