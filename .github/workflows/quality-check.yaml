@@ -40,12 +40,11 @@ jobs:
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
 
-      - name: Install Python dependencies
-        run: poetry install
-
-      - name: Update Poetry lock file
+      - name: Regenerate Poetry lock file
         run: |
-          poetry update
+        rm -f poetry.lock
+        poetry lock
+        poetry install
 
       - name: Configure environment variables for CMake
         run: |
