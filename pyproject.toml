@@ -22,20 +22,14 @@ build = "build.py"
 [tool.poetry.dependencies]
 cmake = "~3.18.0"
 importlib-metadata = ">=4.4,<5.0"
-numpy = ">=1.19.2,<1.20.0"
-python = ">=3.8,<3.11"
-
-# Default TensorFlow version for Python 3.9 to 3.10
-tensorflow = [
-    { version = ">=2.4,<=2.10", markers = "python_version >= '3.9' and python_version < '3.11'" },
-    { version = "~2.4.0", markers = "python_version == '3.8'" }
-]
-
+numpy = "^1.21.0"
+python = ">=3.10,<3.11"
+tensorflow = "~2.8.0"
 
 [tool.poetry.dev-dependencies]
 cpplint = "^1.5.3"
 mock = "^4.0.2"
-mypy = "^1.7"
+mypy = "1.8.0"
 pylint = "2.3.1"
 pytest = "6.2.5"
 pytest-benchmark = "^3.2.3"
@@ -66,7 +60,7 @@ test = "pytest --pylint --mypy --black --isort --cache-clear -ra -v --cov banded
 black = "black ."
 isort = "isort --atomic -y"
 format = "task isort && task black"
-check_format = "pytest -v --cache-clear --black --isort -m 'black or isort'"
+check_format = "pytest -v --cache-clear --black --isort -m black_isort"
 
 [tool.black]
 line-length = 95
@@ -80,6 +74,6 @@ line_length = 95
 
 
 [build-system]
-requires = ["poetry>=0.12", "tensorflow>=2.4.0,<=2.10.0", "cmake"]
+requires = ["poetry>=0.12", "tensorflow>=2.8.0,<2.9.0", "cmake"]
 build-backend = "poetry.masonry.api"
 flags = ["-DCMAKE_CXX_STANDARD=14"]

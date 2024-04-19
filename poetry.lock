@@ -228,14 +228,14 @@ six = "*"
 
 [[package]]
 name = "grpcio"
-version = "1.62.2"
+version = "1.62.1"
 description = "HTTP/2-based RPC framework"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-protobuf = ["grpcio-tools (>=1.62.2)"]
+protobuf = ["grpcio-tools (>=1.62.1)"]
 
 [[package]]
 name = "h5py"
@@ -934,7 +934,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-ena
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10,<3.11"
-content-hash = "b68bc0df3a475c9b51ce5ad122385c9af22a124489d3f45eeb6d4c09a26b5037"
+content-hash = "812c57512ef22cf4124e5b56430182b01acb10eea67c33027fbffd362011a747"
 
 [metadata.files]
 absl-py = []
