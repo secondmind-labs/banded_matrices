@@ -75,7 +75,7 @@ test = "pytest --pylint --mypy --black --isort --cache-clear -ra -v --cov banded
 black = "black ."
 isort = "isort --atomic -y"
 format = "task isort && task black"
-check_format = "pytest -v --cache-clear --black --isort -m black_isort"
+check_format = "pytest -v --cache-clear --black --isort -m 'black or isort'"
 
 [tool.black]
 line-length = 95

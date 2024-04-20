@@ -33,9 +33,6 @@ jobs:
         run: |
           echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
 
-      - name: Verify TensorFlow installation
-        run: |
-          python -c "import tensorflow as tf; print(tf.__version__)"
 
       - name: Install building tools
         run: |
