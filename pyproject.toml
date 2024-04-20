@@ -23,7 +23,7 @@ build = "build.py"
 cmake = ">=3.18.0,<3.19.0"
 importlib-metadata = ">=4.4,<5.0"
 numpy = ">=1.18.0,<2.0.0"
-python = ">=3.7,<3.12"
+python = ">=3.8,<3.12"
 
 tensorflow = [
     { version = ">=2.4.0,<2.5.0", markers = "python_version >= '3.7' and python_version < '3.8'" },     
