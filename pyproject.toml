@@ -28,7 +28,7 @@ python = ">=3.8,<3.12"
 tensorflow = [
     { version = ">=2.4.0,<2.7.0", markers = "python_version >= '3.8' and python_version < '3.9'" },
     { version = ">=2.5.0,<2.7.0", markers = "python_version >= '3.9' and python_version < '3.10'" },
-    { version = ">=2.7.0,<2.12.0", markers = "python_version >= '3.10' and python_version < '3.12'" }
+    { version = ">=2.7.0,<2.8.0", markers = "python_version >= '3.10' and python_version < '3.12'" }
 ]
 # tensorflow = ">=2.8.0,<2.9.0"
 
