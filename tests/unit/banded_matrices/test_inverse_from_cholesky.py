@@ -135,7 +135,9 @@ def gradient_reference_code_short(L, n, k, bS, S):
             bS[i + 1 : i + k, j] -= U[i, i + 1 : i + k] * bS[i, j]
             bU[i, i + 1 : i + k] -= S[i + 1 : i + k, j] * bS[i, j]
 
-    bL += bU.T / vec + (np.diag(-2.0 * np.diag(bS) / vec**3 - np.sum(bU.T * L, 0) / (vec**2)))
+    bL += bU.T / vec + (
+        np.diag(-2.0 * np.diag(bS) / vec**3 - np.sum(bU.T * L, 0) / (vec**2))
+    )
 
     return bL
 
@@ -146,7 +148,6 @@ def gradient_reference_code_short(L, n, k, bS, S):
 def test_gradient_against_reference_python_code(n, lower_bandwidth, result_lower_bandwidth):
     np.random.seed(279)
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
         # The L Cholesky matrix, input of the op in forward mode
         k = lower_bandwidth + 1
         L_band = generate_band_mat(n, lower_bandwidth, 0)

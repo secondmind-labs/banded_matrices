@@ -73,7 +73,6 @@ def test_chol_solve_mat_rev_mode_gradient_against_tf_chol_solve(
     np.random.seed(4123469)
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         # construct lower banded matrix and vector
         banded_lower = generate_band_mat(n, left_bandwidth, 0)
         vector = np.random.rand(n, vector_count)

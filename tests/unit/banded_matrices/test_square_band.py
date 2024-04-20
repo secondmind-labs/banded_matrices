@@ -32,9 +32,7 @@ SOME_SHAPES = [(2, 0), (3, 0), (1, 5), (0, 0), (0, 4)]
 @pytest.mark.parametrize("n", [8])
 def test_forward_square_band(bands, n):
     for l1, u1 in [bands, reversed(bands)]:
-
         with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
             banded1 = generate_band_mat(n, l1, u1)
 
             dense1 = to_dense(banded1, l1, u1)
@@ -57,9 +55,7 @@ def test_forward_square_band(bands, n):
 @pytest.mark.parametrize("n", [8])
 def test_gradient_square_band_against_tf(bands, n):
     for l1, u1 in [bands, reversed(bands)]:
-
         with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
             banded1 = np.random.randint(1, 4, (l1 + u1 + 1, n)).astype(float)
             dense1 = to_dense(banded1, l1, u1)
 

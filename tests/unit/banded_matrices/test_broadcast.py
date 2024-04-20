@@ -59,7 +59,6 @@ def test_banded_product_broadcast(shape_with_bands_left, shape_with_bands_right)
     Tests that banded product broadcasts like numpy product.
     """
     with tf.Graph().as_default():
-
         l1, u1, n = shape_with_bands_left[-3:]
         l2, u2, check_n = shape_with_bands_right[-3:]
         assert check_n == n
@@ -205,7 +204,6 @@ def test_cholesky_broadcast_deep():
         dense_grad = tf.gradients(ys=cholesky_dense, xs=cst_op_dense)
 
         with tf.compat.v1.Session() as session:
-
             computed = session.run(cholesky_banded)[0][0]
             dense_reference = session.run(cholesky_dense)
             computed = to_dense_tensor(computed, l, u)
