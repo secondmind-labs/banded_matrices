@@ -129,7 +129,6 @@ def test_forward_solve_against_numpy_solve(
         left_upper_bandwidth = left_bandwidth
 
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
         banded1 = generate_band_mat(dim, left_lower_bandwidth, left_upper_bandwidth)
         banded2 = generate_band_mat(dim, right_lower_bandwidth, right_upper_bandwidth)
 
@@ -363,7 +362,6 @@ def test_rev_mode_gradient_solve_against_tf_gradient(
     """
     np.random.seed(3794567)
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
         if left_is_lower_triangular:
             left_lower_bandwidth = left_bandwidth
             left_upper_bandwidth = 0
@@ -467,7 +465,6 @@ def test_algebra_reverse_mode_gradient_solve(
     """
     np.random.seed(9379456)
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         np.random.seed(3794567)
         banded1 = generate_band_mat(dim, left_bandwidth, 0)
         banded2 = generate_band_mat(dim, right_lower_bandwidth, right_upper_bandwidth)
