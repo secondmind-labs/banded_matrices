@@ -40,6 +40,14 @@ jobs:
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
 
+      - name: Install Python dependencies
+        run: poetry install
+
+      - name: Configure environment variables for CMake
+        run: |
+          echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
+
+
       - name: Install building tools
         run: |
           sudo apt-get update
@@ -54,6 +62,10 @@ jobs:
 
       - name: Install package
         run: poetry install
+
+      - name: Set environment variables for tests
+        run: |
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/banded_matrices/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
       - name: Run tests
         run: poetry run task test
