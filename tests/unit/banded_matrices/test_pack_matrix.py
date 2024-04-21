@@ -33,6 +33,7 @@ BANDWIDTHS = [(3, 2), (1, 5), (0, 0)]
 @pytest.mark.parametrize("bandwidth", BANDWIDTHS)
 def test_pack_unpack_operations(bandwidth):
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
+
         lower_bandwidth, upper_bandwidth = bandwidth
 
         banded = generate_band_mat(DIMENSION, lower_bandwidth, upper_bandwidth)
@@ -59,6 +60,7 @@ def test_pack_unpack_gradients(bandwidth):
     dense = to_dense(banded, lower_bandwidth, upper_bandwidth)
 
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         banded_op = constant_op(banded)
         dense_op = constant_op(dense)
 

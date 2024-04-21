@@ -112,6 +112,7 @@ def test_gradient_outer(n, l_out):
     """
     np.random.seed(1234567)
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         banded1 = np.random.rand(n, 1)
 
         cst_op1 = constant_op(banded1)
@@ -128,6 +129,7 @@ def test_gradient_outer(n, l_out):
 def test_gradient_outer_vec_vec_general(n, l_out, u_out):
     np.random.seed(1234567)
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         banded1 = np.random.rand(n, 1)
         banded2 = np.random.rand(n, 1)
 
@@ -150,6 +152,7 @@ def test_gradient_outer_vec_vec_general(n, l_out, u_out):
 def test_gradient_outer_mat_mat_general(n, count_vectors, l_out, u_out):
     np.random.seed(1234567)
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         banded1 = np.random.rand(n, count_vectors)
         banded2 = np.random.rand(n, count_vectors)
 
@@ -169,6 +172,7 @@ def test_gradient_outer_mat_mat_general(n, count_vectors, l_out, u_out):
 def test_gradient_square_mat_against_tf(n, count_vectors, l_out):
     np.random.seed(1234567)
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
+
         banded = np.random.rand(n, count_vectors)
 
         cst_op = constant_op(banded)

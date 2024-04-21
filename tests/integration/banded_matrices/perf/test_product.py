@@ -40,6 +40,7 @@ def test_perf_product():
     could make a difference.
     """
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
+
         banded1 = generate_band_mat(n, l, u)
         banded2 = generate_band_mat(n, l, u)
 

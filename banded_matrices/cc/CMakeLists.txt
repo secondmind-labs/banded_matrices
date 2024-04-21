@@ -87,7 +87,7 @@ if(TF_LINK_FLAGS_NOT_FOUND)
 endif()
 
 # Set the standard compilation and linking flags
-set(CMAKE_CXX_FLAGS "-g -std=c++14 -Wall -Wextra -Wfloat-equal -Wshadow -Wconversion ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-g -std=c++11 -Wall -Wextra -Wfloat-equal -Wshadow -Wconversion ${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "${TF_COMPILE_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${TF_LINK_FLAGS}")
