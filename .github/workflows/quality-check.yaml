@@ -34,39 +34,20 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-
+      # ------------ Install poetry
       - name: Setup pip/poetry
         run: |
           pip install -U pip poetry twine
           poetry config virtualenvs.create false
-
-      - name: Install Python dependencies
-        run: poetry install
-
-      - name: Configure environment variables for CMake
-        run: |
-          echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
-
-
+      # ------------ install tools
       - name: Install building tools
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential cmake g++-14
-
-      - name: Configure and Build C++ Library
-        run: |
-          mkdir -p banded_matrices/build
-          cd banded_matrices/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
-          make
-
+      # ------------ build and install package
       - name: Install package
         run: poetry install
-
-      - name: Set environment variables for tests
-        run: |
-          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/banded_matrices/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-
+      # ------------ run tests
       - name: Run tests
         run: poetry run task test
 
