@@ -324,7 +324,6 @@ def test_band_to_block_symm_gradients():
     """
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         b11 = tf.constant([[1.0]])
         b12 = tf.constant([[2.0]])
         b22 = tf.constant([[3.0]])
@@ -367,7 +366,6 @@ def test_band_to_block_non_symm_gradients():
     """
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         b11 = tf.constant([[1.0]])
         b12 = tf.constant([[2.0]])
         b22 = tf.constant([[3.0]])

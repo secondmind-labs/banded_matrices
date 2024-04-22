@@ -47,7 +47,6 @@ def test_forward_solve_triang_mat_against_numpy_solve(
     """
     np.random.seed(41234679)
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         # construct lower banded matrix and vector
         banded_lower = generate_band_mat(n, left_bandwidth, 0)
         vector = np.random.rand(n, vector_count)
@@ -87,7 +86,6 @@ def test_solve_triang_mat_rev_mode_gradient_against_tf_triangular_solve(
     """
     np.random.seed(4123469)
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
-
         banded_lower = generate_band_mat(n, left_bandwidth, 0)
         dense_lower = to_dense(banded_lower, left_bandwidth, 0)
         vector = np.random.rand(n, vector_count)
@@ -140,7 +138,6 @@ def test_solve_triang_mat_jacobians_using_finite_differencing(n, left_bandwidth,
     """
     np.random.seed(41234679)
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         banded_lower = generate_band_mat(n, left_bandwidth, 0)
         vector = np.random.rand(n, vector_count)
 
