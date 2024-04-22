@@ -265,7 +265,6 @@ def test_gradient_of_square(tr1, tr2):
     l, u = 2, 3
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         banded = generate_band_mat(n, l, u)
         dense = to_dense(banded, l, u)
 
@@ -317,7 +316,6 @@ def test_gradient_of_L_Lt(lout, uout):
     l, u = 1, 3
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         banded = generate_band_mat(n, l, u)
         dense = to_dense(banded, l, u)
 

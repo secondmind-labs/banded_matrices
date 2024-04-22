@@ -54,7 +54,7 @@ def test_forward_chol_solve_band_mat(n, left_bandwidth, vector_count):
         chol_solve_tf = chol_solve_tf_op.eval()
 
         # compare
-        norm = np.sqrt(np.sum(chol_solve ** 2))
+        norm = np.sqrt(np.sum(chol_solve**2))
         np.testing.assert_almost_equal(
             actual=chol_solve / norm, desired=chol_solve_tf / norm, decimal=12
         )
@@ -73,7 +73,6 @@ def test_chol_solve_mat_rev_mode_gradient_against_tf_chol_solve(
     np.random.seed(4123469)
 
     with tf.compat.v1.Session(graph=tf.Graph()):
-
         # construct lower banded matrix and vector
         banded_lower = generate_band_mat(n, left_bandwidth, 0)
         vector = np.random.rand(n, vector_count)
@@ -102,13 +101,13 @@ def test_chol_solve_mat_rev_mode_gradient_against_tf_chol_solve(
         grad_chol_solve_tf_right = grad_chol_solve_tf_op[1].eval()
 
         # compare
-        norm = np.sqrt(np.sum(grad_chol_solve_left ** 2))
+        norm = np.sqrt(np.sum(grad_chol_solve_left**2))
         np.testing.assert_almost_equal(
             actual=grad_chol_solve_left / norm,
             desired=grad_chol_solve_tf_left / norm,
             decimal=12,
         )
-        norm = np.sqrt(np.sum(grad_chol_solve_right ** 2))
+        norm = np.sqrt(np.sum(grad_chol_solve_right**2))
         np.testing.assert_almost_equal(
             actual=grad_chol_solve_right / norm,
             desired=grad_chol_solve_tf_right / norm,

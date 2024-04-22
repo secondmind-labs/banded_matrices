@@ -2,15 +2,23 @@
 
 ## Overview
 
-This module is for production-ready TensorFlow operators.
+A library providing C++ linear algebra operators (matmul, solve, ...) dedicated to banded matrices and a [TensorFlow](https://www.tensorflow.org/) interface.
+This extends the set of existing TensorFlow operators which as of August 2021 only include `banded_triangular_solve`.
 
-For banded operators a key reference is the paper by Durrande et al:
-"[Banded Matrix Operators for Gaussian Markov Models in the Automatic Differentiation Era](https://arxiv.org/abs/1902.10078)"
+Details on the implemented operators may be found in Durrande et al.:
+"[Banded Matrix Operators for Gaussian Markov Models in the Automatic Differentiation Era](http://proceedings.mlr.press/v89/durrande19a.html)", and in Adam et al.: "[Doubly Sparse Variational Gaussian Processes](http://proceedings.mlr.press/v108/adam20a.html)" 
 
 
 ## Installation
 
-### Source installation
+### For users
+
+To install the latest (stable) release of the toolbox from [PyPI](https://pypi.org/), use `pip`:
+```bash
+$ pip install banded_matrices
+```
+
+### For contributors
 
 This project uses [Poetry](https://python-poetry.org/docs) to
 manage dependencies in a local virtual environment. To install Poetry, [follow the
@@ -67,14 +75,6 @@ install fails, and then reattempt the installation. To do this, use the command:
 poetry install || { poetry run pip install -U pip==20.0.2 && poetry install; }
 ```
 
-### Artifactory installation
-
-Alternatively you can install the PyPi package:
-
-```bash
-pip install banded_matrices
-``` 
-
 ## Running the tests
 
 Run these commands from the root directory of this repository. 
@@ -100,14 +100,31 @@ poetry run task cpplint
 **NOTE:** Running the tests requires
 that the project virtual environment has been updated. See [Installation](#Installation).
 
-## Adding new Python dependencies
+## The Secondmind Labs Community
 
-- To specify dependencies required by `{{ cookiecutter.app_name }}`, run `poetry add`.
+### Getting help
 
-- To specify dependencies required to build or test the project, run `poetry add --dev`.
+**Bugs, feature requests, pain points, annoying design quirks, etc:**
+Please use [GitHub issues](https://github.com/secondmind-labs/banded_matrices/issues/) to flag up bugs/issues/pain points, suggest new features, and discuss anything else related to the use of banded_matrices that in some sense involves changing the banded_matrices code itself. We positively welcome comments or concerns about usability, and suggestions for changes at any level of design. We aim to respond to issues promptly, but if you believe we may have forgotten about an issue, please feel free to add another comment to remind us.
+
+### Slack workspace
+
+We have a public [Secondmind Labs slack workspace](https://secondmind-labs.slack.com/). Please use this [invite link](https://join.slack.com/t/secondmind-labs/shared_invite/zt-ph07nuie-gMlkle__tjvXBay4FNSLkw) and join the #banded_matrices channel, whether you'd just like to ask short informal questions or want to be involved in the discussion and future development of banded_matrices.
 
 
----
+### Contributing
 
-This project was created using the [cookiecutter-python](https://github.com/Prowler-io/cookiecutter-python)
-Cookiecutter template.
+All constructive input is very much welcome. For detailed information, see the [guidelines for contributors](CONTRIBUTING.md).
+
+
+### Maintainers
+
+Banded_matrices was originally created at [Secondmind Labs](https://www.secondmind.ai/labs/) and is now maintained by (in alphabetical order)
+[Vincent Adam](https://vincentadam87.github.io/),
+[Artem Artemev](https://github.com/awav/).
+**We are grateful to [all contributors](CONTRIBUTORS.md) who have helped shape banded_matrices.**
+
+Banded_matrices is an open source project. If you have relevant skills and are interested in contributing then please do contact us (see ["The Secondmind Labs Community" section](#the-secondmind-labs-community) above).
+
+We are very grateful to our Secondmind Labs colleagues, maintainers of [GPflow](https://github.com/GPflow/GPflow), [GPflux](https://github.com/secondmind-labs/GPflux), [Trieste](https://github.com/secondmind-labs/trieste) and [Bellman](https://github.com/Bellman-devs/bellman), for their help with creating contributing guidelines, instructions for users and open-sourcing in general.
+
