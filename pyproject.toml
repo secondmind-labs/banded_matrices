@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "banded_matrices"
-version = "0.0.7"
+version = "0.1.0"
 description = "Native (C++) implementation of Banded Matrices for TensorFlow"
 readme = "README.md"
 repository = "https://github.com/secondmind-labs/banded_matrices"
