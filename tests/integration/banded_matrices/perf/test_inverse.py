@@ -47,6 +47,7 @@ def test_perf_inv_from_chol():
     grad_ys = np.ones_like(L_band)
 
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
+
         # Our implementation of the gradient:
         cst_k_band = constant_op(L_band)
         inverse_op = inverse_from_cholesky_band(cst_k_band)

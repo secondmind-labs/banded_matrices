@@ -33,6 +33,7 @@ from tests.utils.banded_matrices_utils import (
 @pytest.mark.parametrize("band", [(2, 0), (0, 4), (0, 0), (3, 3), (1, 5), (7, 0)])
 @pytest.mark.parametrize("flags", [(False, False), (True, False), (False, True)])
 def test_matrix_vector_product(dim, band, flags, vector_count):
+
     with tf.compat.v1.Session(graph=tf.Graph()) as session:
         lower_bandwidth, upper_bandwidth = band
         transpose, symmetrise = flags
@@ -73,6 +74,7 @@ def test_jacobian_product_band_mat(dim, band, vector_count, transpose_left):
     Gradients are only valid for an operator that has all Boolean flags False.
     """
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         lower_bandwidth, upper_bandwidth = band
         banded_matrix = generate_band_mat(dim, lower_bandwidth, upper_bandwidth)
         vector = np.random.rand(dim, vector_count)
@@ -103,6 +105,7 @@ def test_rev_mode_gradients_product_band_mat(dim, band, vector_count, transpose_
     Testing reverse mode gradients of product_band_mat against tf.matmul
     """
     with tf.compat.v1.Session(graph=tf.Graph()):
+
         lower_bandwidth, upper_bandwidth = band
         banded_matrix = generate_band_mat(dim, lower_bandwidth, upper_bandwidth)
         vector = np.random.rand(dim, vector_count)

@@ -6,7 +6,6 @@ to generate results.
 1. pytest -k broadcasting_profile --benchmark-autosave --benchmark-json ./output.json -v
 2. python test_run_full_broadcasting_profile.py ./output.json
 """
-
 # pylint: disable=redefined-outer-name,cell-var-from-loop
 import argparse
 import json
