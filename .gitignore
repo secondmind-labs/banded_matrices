@@ -21,3 +21,6 @@ __pycache__
 
 # Don't commit the generate Cython library
 banded_matrices.*.so
+
+# PyEnv
+.python-version
