@@ -19,6 +19,8 @@ name: Upload-PyPI
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     tags:
       - "v*.*.*"
 
