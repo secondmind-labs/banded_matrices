@@ -68,7 +68,7 @@ class build_ext(build_ext_orig):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={str(ext_dir / ext.name / 'lib')}",
             f"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY={str(ext_dir / ext.name / 'bin')}",
             f"-DCMAKE_VERBOSE_MAKEFILE:BOOL=on",
-            "-DCMAKE_CXX_STANDARD=14"
+            "-DCMAKE_CXX_STANDARD=14",
         ]
 
         os.chdir(str(build_temp))
