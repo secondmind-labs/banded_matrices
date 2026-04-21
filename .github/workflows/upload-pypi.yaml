@@ -46,7 +46,7 @@ jobs:
         env:
           CIBW_PLATFORM: ${{ matrix.cibw-platform }}
           CIBW_ARCHS: ${{ matrix.cibw-archs }}
-          CIBW_BUILD: "cp310-* cp311-* cp312-* cp313-*"
+          CIBW_BUILD: "cp310-* cp311-* cp312-*"
           CIBW_SKIP: "*-musllinux_* *-win_*"
           CIBW_TEST_COMMAND: >-
             python -c "import banded_matrices.banded"
