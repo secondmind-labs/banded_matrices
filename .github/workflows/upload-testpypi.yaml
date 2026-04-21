@@ -16,6 +16,9 @@ name: Build and Upload TestPyPI Wheels
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - update-python-compat
 
 jobs:
   build-wheels:
@@ -75,6 +78,7 @@ jobs:
 
   upload-testpypi:
     name: Upload to TestPyPI
+    if: github.event_name == 'workflow_dispatch'
     needs:
       - build-wheels
       - build-sdist
