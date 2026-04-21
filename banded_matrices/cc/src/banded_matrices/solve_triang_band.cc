@@ -19,7 +19,7 @@
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 #include "Eigen/Dense"
 
@@ -229,7 +229,7 @@ REGISTER_OP("SolveTriangBand")
           context->Matrix(
             result_lower_bandwidth + 1 + result_upper_bandwidth,
             dim));
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(SolveTriangBand, float)

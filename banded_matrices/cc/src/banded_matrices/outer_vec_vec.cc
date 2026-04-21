@@ -18,7 +18,7 @@
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 #include "Eigen/Dense"
 
@@ -127,7 +127,7 @@ class OuterVecVecOp : public OpKernel {
       return errors::InvalidArgument(error);
     }
 
-    return Status::OK();
+    return OkStatus();
   }
 
  private:
@@ -194,7 +194,7 @@ Status compute_outer_mat_mat(
     target = left.row(row) * right.col(col);
   });
 
-  return Status::OK();
+  return OkStatus();
 }
 
 
@@ -292,7 +292,7 @@ REGISTER_OP("OuterVecVec")
           context->Matrix(
             result_lower_bandwidth + 1 + result_upper_bandwidth,
             dim));
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(OuterVecVec, float)
@@ -323,7 +323,7 @@ REGISTER_OP("OuterMatMat")
           context->Matrix(
             result_lower_bandwidth + 1 + result_upper_bandwidth,
             dim));
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(OuterMatMat, float)
@@ -346,7 +346,7 @@ REGISTER_OP("SquareMat")
 
       context->set_output(
           0, context->Matrix(result_lower_bandwidth + 1, dim));
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(SquareMat, float)

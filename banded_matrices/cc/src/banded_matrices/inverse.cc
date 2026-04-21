@@ -422,7 +422,7 @@ REGISTER_OP("InverseFromCholeskyBand")
     TF_RETURN_IF_ERROR(c->Concatenate(leading_dims, mat, &out));
 
     c->set_output(0, out);
-    return Status::OK();
+    return OkStatus();
   });
 
 REGISTER_OP("GradientOfInverseFromCholeskyBand")
@@ -433,7 +433,7 @@ REGISTER_OP("GradientOfInverseFromCholeskyBand")
   .Output("inverse_banded_matrix: T")
   .SetShapeFn([](InferenceContext* c) {
     c->set_output(0, c->input(0));
-    return Status::OK();
+    return OkStatus();
   });
 
 REGISTER_CPU(InverseFromCholeskyBand, float);

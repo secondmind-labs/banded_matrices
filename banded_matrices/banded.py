@@ -770,11 +770,23 @@ def _grad_product_band_band(
     transpose_left = op.get_attr("transpose_left")
     transpose_right = op.get_attr("transpose_right")
 
-    # Mapping from each tensor to is pair of widths:
+    def tensor_key(tensor: tf.Tensor):
+        return tensor.ref() if hasattr(tensor, "ref") else id(tensor)
+
+    # Mapping from each tensor to its pair of widths:
     bandwidth = {
-        left: (op.get_attr("left_lower_bandwidth"), op.get_attr("left_upper_bandwidth")),
-        right: (op.get_attr("right_lower_bandwidth"), op.get_attr("right_upper_bandwidth")),
-        grad: (op.get_attr("result_lower_bandwidth"), op.get_attr("result_upper_bandwidth")),
+        tensor_key(left): (
+            op.get_attr("left_lower_bandwidth"),
+            op.get_attr("left_upper_bandwidth"),
+        ),
+        tensor_key(right): (
+            op.get_attr("right_lower_bandwidth"),
+            op.get_attr("right_upper_bandwidth"),
+        ),
+        tensor_key(grad): (
+            op.get_attr("result_lower_bandwidth"),
+            op.get_attr("result_upper_bandwidth"),
+        ),
     }
 
     def product(
@@ -788,9 +800,9 @@ def _grad_product_band_band(
         Make a banded matrix products of two of the three terms,
         where the target should be shaped as the third term.
         """
-        left_lower_bandwidth, left_upper_bandwidth = bandwidth[lhs]
-        right_lower_bandwidth, right_upper_bandwidth = bandwidth[rhs]
-        result_lower_bandwidth, result_upper_bandwidth = bandwidth[result]
+        left_lower_bandwidth, left_upper_bandwidth = bandwidth[tensor_key(lhs)]
+        right_lower_bandwidth, right_upper_bandwidth = bandwidth[tensor_key(rhs)]
+        result_lower_bandwidth, result_upper_bandwidth = bandwidth[tensor_key(result)]
 
         return product_band_band(
             lhs,

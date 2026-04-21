@@ -16,57 +16,58 @@ name: Tests
 
 on:
   push:
-  release:
-    types:
-      - created
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  check-and-test:
-    runs-on: ubuntu-latest
+  test:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8.12", "3.9.12", "3.10.4"]
-        poetry-version: [1.1.12]
-    name: Python-${{ matrix.python-version }}
+        include:
+          - os: ubuntu-latest
+            python-version: "3.10"
+          - os: ubuntu-latest
+            python-version: "3.11"
+          - os: ubuntu-latest
+            python-version: "3.12"
+          - os: ubuntu-latest
+            python-version: "3.13"
+          - os: macos-13
+            python-version: "3.12"
+          - os: macos-14
+            python-version: "3.12"
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Setup pip/poetry
+      - name: Install Poetry
         run: |
-          pip install -U pip poetry twine
-          poetry config virtualenvs.create false
+          python -m pip install --upgrade pip poetry
+          poetry config virtualenvs.in-project true
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: poetry install
 
-      - name: Configure environment variables for CMake
+      - name: Build TensorFlow ops library
+        shell: bash
         run: |
-          echo "PYTHON_BIN=$(which python)" >> $GITHUB_ENV
-
-
-      - name: Install building tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake g++-14
-
-      - name: Configure and Build C++ Library
-        run: |
-          mkdir -p banded_matrices/build
-          cd banded_matrices/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
-          make
-
-      - name: Install package
-        run: poetry install
-
-      - name: Set environment variables for tests
-        run: |
-          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/banded_matrices/build/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+          PYTHON_BIN="$(poetry run python -c 'import sys; print(sys.executable)')"
+          poetry run cmake \
+            -S banded_matrices \
+            -B banded_matrices/build \
+            -DPYTHON_BIN="$PYTHON_BIN" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_LIBRARY_OUTPUT_DIRECTORY="$PWD/banded_matrices/lib" \
+            -DCMAKE_RUNTIME_OUTPUT_DIRECTORY="$PWD/banded_matrices/bin" \
+            -DCMAKE_CXX_STANDARD=17
+          poetry run cmake --build banded_matrices/build --parallel 4
 
       - name: Run tests
-        run: poetry run task test
-
+        run: poetry run pytest -x -q

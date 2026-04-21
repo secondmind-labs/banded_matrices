@@ -21,7 +21,7 @@
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 #include "Eigen/Dense"
 
@@ -239,7 +239,7 @@ REGISTER_OP("SymmetriseBand")
         context->Concatenate(leading_dims, mat, &out));
 
       context->set_output(0, out);
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_OP("HalveBand")
@@ -271,7 +271,7 @@ REGISTER_OP("HalveBand")
         context->Concatenate(leading_dims, mat, &out));
 
       context->set_output(0, out);
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(SymmetriseBand, float)

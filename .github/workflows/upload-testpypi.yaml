@@ -12,13 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Build and Upload PyPI Wheels
+name: Build and Upload TestPyPI Wheels
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*.*.*"
 
 jobs:
   build-wheels:
@@ -76,8 +73,8 @@ jobs:
           name: sdist
           path: dist/*.tar.gz
 
-  upload-pypi:
-    name: Upload to PyPI
+  upload-testpypi:
+    name: Upload to TestPyPI
     needs:
       - build-wheels
       - build-sdist
@@ -89,9 +86,10 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - name: Publish to PyPI
+      - name: Publish to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          repository-url: https://test.pypi.org/legacy/
           packages-dir: dist
           user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
