@@ -15,6 +15,7 @@
 #
 
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -76,6 +77,11 @@ class build_ext(build_ext_orig):
         self.spawn(["cmake"] + cmake_args)
         self.spawn(["cmake", "--build", "."])
         os.chdir(str(cwd))
+
+        build_lib_dir = Path(self.build_lib) / ext.name / "lib"
+        build_lib_dir.mkdir(parents=True, exist_ok=True)
+        for library in package_lib_dir.glob("libbanded_matrices.*"):
+            shutil.copy2(library, build_lib_dir / library.name)
 
 
 def build(setup_kwargs):
