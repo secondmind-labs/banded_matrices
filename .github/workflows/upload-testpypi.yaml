@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - update-python-compat
+      - dev
 
 jobs:
   build-wheels:
