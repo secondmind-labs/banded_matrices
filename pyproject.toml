@@ -19,6 +19,8 @@ classifiers=[
 include = [
         "LICENCE",
         "dummy.c",
+        "build.py",
+        "build_backend.py",
         { path = "banded_matrices/lib/libbanded_matrices.*", format = "wheel" },
 ]
 build = "build.py"
@@ -84,4 +86,5 @@ requires = [
     "cmake>=3.26,<4.0",
     "tensorflow>=2.16,<2.22",
 ]
-build-backend = "poetry.core.masonry.api"
+build-backend = "build_backend"
+backend-path = ["."]
