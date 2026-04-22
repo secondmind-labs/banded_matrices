@@ -84,6 +84,7 @@ requires = [
     "poetry-core>=1.0.0",
     "setuptools",
     "cmake>=3.26,<4.0",
+    "numpy>=1.26,<2.0",
     "tensorflow>=2.16,<2.22",
 ]
 build-backend = "build_backend"
