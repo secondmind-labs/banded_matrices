@@ -53,10 +53,10 @@ class build_ext(build_ext_orig):
         build_temp = Path(self.build_temp)
         build_temp.mkdir(parents=True, exist_ok=True)
 
-        # The location that the components is going to get installed into.
-        # Note that we abuse the fact that a (pointless, empty) Cython extension is going to be
-        # generated and installed, and from this we can calculate the install location.
-        ext_dir = Path(self.get_ext_fullpath(ext.name)).parent.absolute()
+        # Poetry includes package data from the source tree. Put the generated TensorFlow op
+        # under the package's lib directory so clean PEP 517 builds produce complete wheels.
+        package_lib_dir = cwd / ext.name / "lib"
+        package_lib_dir.mkdir(parents=True, exist_ok=True)
 
         # Define the CMake arguments that we want for the build
         cmake_args = [
@@ -65,14 +65,14 @@ class build_ext(build_ext_orig):
             f"-DPYTHON_BIN={sys.executable}",
             f"-DCMAKE_BUILD_TYPE={_BANDED_MATRICES_BUILD_TYPE}",
             f"-DCMAKE_CXX_COMPILER={_BANDED_MATRICES_COMPILER}",
-            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={str(ext_dir / ext.name / 'lib')}",
-            f"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY={str(ext_dir / ext.name / 'bin')}",
+            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={str(package_lib_dir)}",
+            f"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY={str(cwd / ext.name / 'bin')}",
             f"-DCMAKE_VERBOSE_MAKEFILE:BOOL=on",
             "-DCMAKE_CXX_STANDARD=17",
         ]
 
         os.chdir(str(build_temp))
-        self.announce(f"Building {ext.name} library at {str(ext_dir)}")
+        self.announce(f"Building {ext.name} library at {str(package_lib_dir)}")
         self.spawn(["cmake"] + cmake_args)
         self.spawn(["cmake", "--build", "."])
         os.chdir(str(cwd))
@@ -85,6 +85,7 @@ def build(setup_kwargs):
         "cmdclass": {"build_ext": build_ext},
         "ext_modules": [CMakeExtension("banded_matrices")],
         "include_package_data": True,
+        "package_data": {"banded_matrices": ["lib/libbanded_matrices.*"]},
     }
 
     # Edit `setup_kwargs` in-place
