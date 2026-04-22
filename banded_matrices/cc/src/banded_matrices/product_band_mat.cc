@@ -17,7 +17,7 @@
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 #include "Eigen/Dense"
 
@@ -151,7 +151,7 @@ REGISTER_OP("ProductBandMat")
   .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
     // Note that input(1) is assumed here to be an Mx1 matrix:
     c->set_output(0, c->input(1));
-    return Status::OK();
+    return OkStatus();
   });
 
 

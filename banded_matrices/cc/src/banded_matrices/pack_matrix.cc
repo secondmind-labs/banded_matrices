@@ -214,7 +214,7 @@ REGISTER_OP("PackDenseMatrixToBanded")
       TF_RETURN_IF_ERROR(
         context->Concatenate(leading_dims, mat, &out));
       context->set_output(0, out);
-      return Status::OK();
+      return OkStatus();
   });
 
 
@@ -236,7 +236,7 @@ REGISTER_OP("UnpackBandedMatrixToDense")
       TF_RETURN_IF_ERROR(
         context->Concatenate(leading_dims, mat, &out));
       context->set_output(0, out);
-      return Status::OK();
+      return OkStatus();
   });
 
 

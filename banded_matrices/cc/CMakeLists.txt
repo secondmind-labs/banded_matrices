@@ -46,9 +46,11 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
 
 # Previously there has been numerical issues reported when allowing the compiler to optimise for
 # native architectures, as builds on Jenkins were utilising the AVX-512 instruction set. To prevent
-# these instructions being used (and to attempt to get some consistency between builds), we target
-# the Haswell architecture for compilation.
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=haswell")
+# these instructions being used (and to attempt to get some consistency between builds), x86_64
+# release builds target the Haswell architecture for compilation. That flag is invalid on arm64.
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64|amd64)$")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=haswell")
+endif()
 
 set(LIB_NAME "${PROJECT_NAME}")
 
@@ -87,7 +89,7 @@ if(TF_LINK_FLAGS_NOT_FOUND)
 endif()
 
 # Set the standard compilation and linking flags
-set(CMAKE_CXX_FLAGS "-g -std=c++14 -Wall -Wextra -Wfloat-equal -Wshadow -Wconversion ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-g -std=c++17 -Wall -Wextra -Wfloat-equal -Wshadow -Wconversion ${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "${TF_COMPILE_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${TF_LINK_FLAGS}")
@@ -95,14 +97,13 @@ string(STRIP ${LINKER_FLAGS} LINKER_FLAGS)
 string(REPLACE " " ";" LINKER_FLAGS "${LINKER_FLAGS}")
 
 if(APPLE)
-    set(TF_CMD_PATH "import tensorflow as tf; import os; print(os.path.dirname(tf.__file__))")
-    execute_process(
-        COMMAND ${PYTHON_BIN} -W ignore -c "${TF_CMD_PATH}"
-        OUTPUT_VARIABLE TF_PY_PATH
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(LINKER_FLAGS "${LINKER_FLAGS} -rpath ${TF_PY_PATH}")
+    set(LINKER_FLAGS "${LINKER_FLAGS} -rpath @loader_path/../../tensorflow")
     string(STRIP "${LINKER_FLAGS}" LINKER_FLAGS)
     message(STATUS "APPLE LINKER_FLAGS=${LINKER_FLAGS}")
+else()
+    set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,-rpath,\\$ORIGIN/../../tensorflow")
+    string(STRIP "${LINKER_FLAGS}" LINKER_FLAGS)
+    message(STATUS "LINKER_FLAGS=${LINKER_FLAGS}")
 endif()
 
 message(STATUS "CXX_FLAGS=${CMAKE_CXX_FLAGS}")

@@ -24,7 +24,7 @@
 #include "banded_matrices/common.hpp"
 #include "banded_matrices/product.hpp"
 #include "banded_matrices/unary_broadcastable_op_kernel.hpp"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 using CPUDevice = Eigen::ThreadPoolDevice;
 using GPUDevice = Eigen::GpuDevice;
@@ -387,7 +387,7 @@ REGISTER_OP("CholeskyBand")
   .Output("banded_lower_triangular: T")
   .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
     c->set_output(0, c->input(0));
-    return Status::OK();
+    return OkStatus();
   });
 
 
@@ -398,7 +398,7 @@ REGISTER_OP("CholeskyBandGrad")
   .Output("matrix_grad_banded: T")
   .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
     c->set_output(0, c->input(1));
-    return Status::OK();
+    return OkStatus();
   });
 
 

@@ -19,7 +19,7 @@
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tensorflow/core/platform/default/logging.h"
+#include "tensorflow/core/platform/logging.h"
 
 #include "Eigen/Dense"
 
@@ -126,7 +126,7 @@ REGISTER_OP("SolveTriangMat")
     .SetShapeFn([](InferenceContext *context) {
       // Note that input(1) is assumed here to be an Mx1 matrix:
       context->set_output(0, context->input(1));
-      return Status::OK();
+      return OkStatus();
     });
 
 REGISTER_CPU(SolveTriangMat, float)
