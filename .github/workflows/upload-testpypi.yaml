@@ -31,9 +31,6 @@ jobs:
           - os: ubuntu-latest
             cibw-platform: linux
             cibw-archs: x86_64
-          - os: macos-13
-            cibw-platform: macos
-            cibw-archs: x86_64
           - os: macos-14
             cibw-platform: macos
             cibw-archs: arm64
